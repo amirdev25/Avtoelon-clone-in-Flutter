@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'body_page.dart';
+
 void main() {
   runApp(const AvtoelonApp());
 }
