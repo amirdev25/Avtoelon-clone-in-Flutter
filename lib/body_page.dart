@@ -1,26 +1,74 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'models/car_model.dart';
 
-class BodyPage extends StatefulWidget {
-  const BodyPage({Key? key}) : super(key: key);
-
-  @override
-  State<BodyPage> createState() => _BodyPageState();
-}
-
-class _BodyPageState extends State<BodyPage> {
+class BodyPage extends StatelessWidget {
   List<CarModel> cars = [];
+
+  BodyPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     loadData();
-    return ListView.builder(
-        itemCount: cars.length,
-        itemBuilder: (context, index) {
-          return listItemView(cars[index]);
-        });
+    return SafeArea(
+      child: Column(
+        children: [
+          Container(
+            height: 56.0,
+            color: Colors.blue,
+            child: Row(
+              children: [
+                Container(
+                  margin: const EdgeInsets.all(16.0),
+                  child: const Icon(
+                    Icons.menu,
+                    color: Colors.white,
+                  ),
+                ),
+                const Expanded(
+                  child: Text(
+                    "Avtoelon.uz",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16.0,
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.all(8.0),
+                  child: const Icon(
+                    Icons.add_circle_outline,
+                    color: Colors.white,
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.all(8.0),
+                  child: const Icon(
+                    Icons.monetization_on_outlined,
+                    color: Colors.white,
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(8.0, 8.0,16.0,8.0),
+                  child: const Icon(
+                    Icons.search,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: cars.length,
+              itemBuilder: (context, index) {
+                return listItemView(cars[index]);
+              },
+            ),
+          )
+        ],
+      ),
+    );
   }
 
   void loadData() {
@@ -124,6 +172,9 @@ class _BodyPageState extends State<BodyPage> {
 
   Widget listItemView(CarModel car) {
     return Card(
+      shadowColor: Colors.black,
+      elevation: 8.0,
+      margin: const EdgeInsets.all(16.0),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
       child: Row(
         children: [
