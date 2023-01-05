@@ -49,7 +49,7 @@ class BodyPage extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.fromLTRB(8.0, 8.0,16.0,8.0),
+                  margin: const EdgeInsets.fromLTRB(8.0, 8.0, 16.0, 8.0),
                   child: const Icon(
                     Icons.search,
                     color: Colors.white,
@@ -219,7 +219,7 @@ class BodyPage extends StatelessWidget {
                 child: Text("Name ${car.name}"),
               ),
             ],
-          )
+          ),
         ],
       ),
     );
