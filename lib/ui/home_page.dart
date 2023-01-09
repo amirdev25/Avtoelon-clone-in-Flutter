@@ -1,11 +1,23 @@
+import 'package:avtoelon/utils/Constants.dart';
 import 'package:flutter/material.dart';
 
-import 'models/car_model.dart';
+import '../models/car_model.dart';
 
-class BodyPage extends StatelessWidget {
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: HomeBody(),
+    );
+  }
+}
+
+class HomeBody extends StatelessWidget {
   List<CarModel> cars = [];
 
-  BodyPage({super.key});
+  HomeBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +74,7 @@ class BodyPage extends StatelessWidget {
             child: ListView.builder(
               itemCount: cars.length,
               itemBuilder: (context, index) {
-                return listItemView(cars[index]);
+                return listItemView(cars[index], context);
               },
             ),
           )
@@ -170,57 +182,77 @@ class BodyPage extends StatelessWidget {
         "28 500 ye"));
   }
 
-  Widget listItemView(CarModel car) {
-    return Card(
-      shadowColor: Colors.black,
-      elevation: 8.0,
-      margin: const EdgeInsets.all(16.0),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
-      child: Row(
-        children: [
-          SizedBox(
-            height: 200.0,
-            width: 200.0,
-            child: Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16.0),
-              ),
-              margin: const EdgeInsets.all(16.0),
-              child: FadeInImage.assetNetwork(
-                image: car.imgUrl,
-                placeholder: 'assets/loading.gif',
+  Widget listItemView(CarModel car, BuildContext context) {
+    return InkWell(
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          Constants.DETAILS_PAGE,
+          arguments: {Constants.CAR: car},
+        );
+      },
+      child: Card(
+        shadowColor: Colors.black,
+        elevation: 2.0,
+        margin: const EdgeInsets.all(4.0),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+        child: Row(
+          children: [
+            SizedBox(
+              height: 120.0,
+              width: 120.0,
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                margin: const EdgeInsets.all(4.0),
+                child: FadeInImage.assetNetwork(
+                  image: car.imgUrl,
+                  placeholder: 'assets/loading.gif',
+                ),
               ),
             ),
-          ),
-          Column(
-            children: [
-              Container(
-                alignment: Alignment.centerLeft,
-                child: Text("Name ${car.name}"),
-              ),
-              Container(
-                alignment: Alignment.centerLeft,
-                child: Text("Name ${car.name}"),
-              ),
-              Container(
-                alignment: Alignment.centerLeft,
-                child: Text("Name ${car.name}"),
-              ),
-              Container(
-                alignment: Alignment.centerLeft,
-                child: Text("Name ${car.name}"),
-              ),
-              Container(
-                alignment: Alignment.centerLeft,
-                child: Text("Name ${car.name}"),
-              ),
-              Container(
-                alignment: Alignment.centerLeft,
-                child: Text("Name ${car.name}"),
-              ),
-            ],
-          ),
-        ],
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: const EdgeInsets.fromLTRB(16.0, 0.0, 0.0, 8.0),
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    car.name,
+                    style: const TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(16.0, 0.0, 0.0, 0.0),
+                  alignment: Alignment.centerLeft,
+                  child:
+                      Text("Year:\t\t ${car.year}", textAlign: TextAlign.start),
+                ),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(16.0, 0.0, 0.0, 0.0),
+                  alignment: Alignment.centerLeft,
+                  child: Text("Town:\t\t ${car.town}"),
+                ),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(16.0, 0.0, 0.0, 0.0),
+                  child: Text("Body:\t\t ${car.body}"),
+                ),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(16.0, 0.0, 0.0, 0.0),
+                  alignment: Alignment.centerLeft,
+                  child: Text("Color:\t\t ${car.color}"),
+                ),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(16.0, 0.0, 0.0, 0.0),
+                  alignment: Alignment.centerLeft,
+                  child: Text("Price:\t\t ${car.price}"),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

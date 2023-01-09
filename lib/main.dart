@@ -1,6 +1,7 @@
+import 'package:avtoelon/ui/details_page.dart';
+import 'package:avtoelon/utils/Constants.dart';
 import 'package:flutter/material.dart';
-
-import 'body_page.dart';
+import 'ui/home_page.dart';
 
 void main() {
   runApp(const AvtoelonApp());
@@ -14,18 +15,11 @@ class AvtoelonApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: const HomePage(),
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: BodyPage(),
+      initialRoute: Constants.HOME_PAGE,
+      routes: {
+        Constants.HOME_PAGE: (context) => HomePage(),
+        Constants.DETAILS_PAGE: (context) => DetailsPage(),
+      },
     );
   }
 }
